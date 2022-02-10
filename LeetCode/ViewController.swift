@@ -19,10 +19,13 @@ class ViewController: UIViewController {
         l2.next = ListNode(9)
         l2.next?.next = ListNode(6)
 
-
-        let res = Solution().addTwoNumbers(l1, l2)
-        print(res)
-  
+        let solution = Solution()
+        let res = solution.addTwoNumbers(l1, l2)
+        
+        let treeNode_right = TreeNode(2, TreeNode(3), nil)
+        let treeNode = TreeNode(1, nil, treeNode_right)
+        let res1 = solution.inorderTraversal(treeNode)
+        print(res1)
         
     }
 
@@ -52,6 +55,35 @@ public class TreeNode {
 }
 
 class Solution {
+    
+//    func subarraysWithKDistinct(_ nums: [Int], _ k: Int) -> Int {
+//
+//    }
+    
+    // MARK: - findBottomLeftValue
+    func findBottomLeftValue(_ root: TreeNode?) -> Int {
+        return 0
+    }
+    
+    // MARK: - Binary tree inorder traversal
+    func inorderTraversal(_ root: TreeNode?) -> [Int] {
+        root == nil ? [] : appendTreeNode(valArray: [], node: root!)
+    }
+    
+    func appendTreeNode(valArray: [Int], node: TreeNode) -> [Int] {
+        var res = valArray
+        if let left = node.left {
+            res = appendTreeNode(valArray: res, node: left)
+        }
+        res.append(node.val)
+        if let right = node.right {
+            res = appendTreeNode(valArray: res, node: right)
+        }
+        return res
+    }
+    
+    
+    // MARK: - add two number
     func listNodeToNumber(_ node: ListNode?) -> Int {
         var node: ListNode? = node
         var num = 0
